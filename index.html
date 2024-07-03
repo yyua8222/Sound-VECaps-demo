@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/custom.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="alternate" href="index.xml" type="application/rss+xml" title="Speech Research">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+  <title>IMPROVING AUDIO GENERATION WITH VISUAL ENHANCED CAPTION</title>
+  <style>
+    audio {
+      width: 170px; /* 设置音频播放器的宽度 */
+      height: 50px; /* 设置音频播放器的高度 */
+    }
+  </style>
+  
+</head>
+
+<body rightmargin=10px leftmargin=10px topmargin="100" bottommargin="100" line-height:160%>
+  <font size="5">
+
+    <div class="container">
+
+      <header role="banner">
+
+      </header>
+      <main role="main">
+        <article itemscope itemtype="https://schema.org/BlogPosting">
+          <br></br>
+          <h1 itemprop="headline" align="center">
+            <font color="000093" size="6">IMPROVING AUDIO GENERATION WITH VISUAL ENHANCED CAPTION
+            </font>
+          </h1>
+          <br></br>
+          <p style="line-height:1" align="center"><b>
+              <font color="061E61">Yi Yuan<sup>1</sup>, Dongya Jia<sup>2</sup>, Xiaobin Zhuang<sup>2</sup>, 
+                Yuanzhe Chen<sup>2</sup>, Zhengxi Liu<sup>2</sup>, Zhuo Chen<sup>2</sup></font>
+            </b></p>
+          <p style="line-height:1" align="center"><b>
+              <font color="061E61">Yuping Wang<sup>2</sup>, Yuxuan Wang<sup>2</sup>, Xubo Liu<sup>1</sup>
+                , Mark D. Plumbley<sup>1</sup>, Wenwu Wang<sup>1</sup></font>
+            </b></p>
+          <p style="line-height:0.6" align="center">
+            <font color="061E61"><sup>1</sup>University of Surrey</font>
+          </p>
+          <p style="line-height:0.6" align="center">
+            <font color="061E61"> <sup>2</sup>ByteDance</font>
+          </p>
+          <section itemprop="entry-text">
+            <br>
+            <div class="container">
+              <center>
+                <p><a href="https://arxiv.org/abs/2301.12503">Paper on ArXiv</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/yyua8222/Sound-VECaps">System on GitHub</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://huggingface.co/spaces/haoheliu/audioldm-text-to-audio-generation">Dataset on Zenodo</a></p>
+              </center>
+            </div>
+            <h2 id="abstract">
+              <font color="000093">Abstract</font>
+            </h2>
+            <p style="text-align: justify;">
+              <font color="061E61"> Driven by diffusion-based models, multimodal learning has shown significant promise in audio generation tasks. 
+                However, existing models often struggle with extended and complex prompts, particularly when captions contain intricate information, 
+                leading to performance degradation, especially in real-world scenarios. 
+                We hypothesize that this issue stems from the quality and quantity of the training datasets. 
+                To address these challenges, we propose a large-scale audio dataset with visually-guided enhanced captions. 
+                We introduce Sound-VECaps, a comprehensive dataset comprising 1.66M high-quality audio-caption pairs with enriched captions, 
+                such as event orders, occurred places, environment information and so on. Additionally, we develop a human-supervised testing set with similar captioning pipelines.
+                 Our results demonstrate that training with Sound-VECaps significantly enhances the model's ability to comprehend and generate audio from complex input prompts, 
+                improving overall system performance. Training with Sound-VECaps, our generation system, AudioLDM, achieves a FAD score of 1.49 on the AudioCaps testing set and 1.06 for the caption-enhanced testing set. 
+                Furthermore, we conduct an extensive analysis of Sound-VECaps across several audio-language tasks, 
+                highlighting the reliability and utility in advancing audio-language multimodal learning.  </font>
+            </p>
+
+
+            <h2 id="note">
+              <font color="000093">Note</font>
+            </h2>
+            <p style="text-align: justify;">
+              <font color="061E61"> In this work, we present Sound-VECaps, a lagre-scale caption dataset generated through Large Lange Models (LLMs). The prompt that
+                LLMs used to construct the proposed caption consists of three different information, visual captions from the video, audio captions from
+                the waveform, and the label taggings provided by the original dataset.  </font>
+            </p>
+            <figure>
+              <p align="center"><img src="pipeline.png" width="100%" class="center" /></p>
+              <figcaption>
+                <p style="text-align: center;">
+                  <font color="061E61" ><b>Figure 1:</b> The caption generation pipeline of the Sound-VECaps
+                </p>
+              </figcaption>
+            </figure>
+            
+
+
+            <br></br>
+            <h2 id="Sound-VECaps Caption Demos">
+              <font color="000093">Sound-VECaps Caption Demos</font>
+            </h2>
+
+            <table class="table" align="center" style="table-layout: fixed;word-break:break-word; font-size: 14px;">
+              <thead>
+                <tr>
+                  <td scope="col" width="18%">
+                    <font color="061E61">Audio</font>
+                  </td>
+                  <td scope="col" width="18%">
+                    <font color="061E61">Wavcaps</font>
+                  </td>
+                  <td scope="col" width="18%">
+                    <font color="061E61">Auto-ACD</font>
+                  </td>
+                  <td scope="col" width="22%">
+                    <font color="061E61">Sound-VECaps_audio</font>
+                  </td>
+                  <td scope="col" width="24%">
+                    <font color="061E61">Sound-VECaps_full</font>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row"><audio controls="controls">
+                      <source src="audio_samples/caption_sample/YCUtbzo2jqkQ.wav"
+                        autoplay />Your browser does not support the audio element.
+                    </audio></td>
+                  <td><font color="061E61">Dogs are barking with background noise.</font></td>
+                  <td><font color="061E61">A dog snores loudly as it sleeps peacefully in a veterinarian's office, surrounded by other domestic animals.</font></td>
+                  <td><font color="061E61">A dog is snoring softly while resting or sleeping, its eyes closed and tongue slightly sticking out, as the sound of domestic animals provides a gentle accompaniment.</font></td>
+                  <td><font color="061E61">A dog, possibly a bulldog, is snoring softly while resting or sleeping on a wooden floor, its eyes closed and tongue slightly sticking out, as the sound of domestic animals in the background provides a gentle accompaniment.</font></td>
+
+                </tr>
+                <tr>
+                  <td scope="row"><audio controls="controls">
+                      <source src="audio_samples/caption_sample/Y9eNBIVq6mNk.wav"
+                        autoplay />Your browser does not support the audio element.
+                    </audio></td>
+                  <td><font color="061E61">A power tool is in use.</font></td>
+                  <td><font color="061E61">The sound of a ratchet and pawl can be heard as mechanisms are being operated in a workshop.</font></td>
+                  <td><font color="061E61">A person is using a drill to tighten fasteners, holding a ratchet and mechanisms, in a well-lit workshop, with a toolbox nearby.</font></td>
+                  <td><font color="061E61">A person is using a drill to tighten fasteners while holding a ratchet and mechanisms, on an orange surface, in a well-lit workshop, with a red toolbox nearby, and the camera remains constant throughout the recording.</font></td>
+
+                </tr>
+                <tr>
+                  <td scope="row"><audio controls="controls">
+                      <source src="audio_samples/caption_sample/YpItdNzDM0_8.wav"
+                        autoplay />Your browser does not support the audio element.
+                    </audio></td>
+                  <td><font color="061E61">Music plays as a man sings, and there are skateboard sounds.</font></td>
+                  <td><font color="061E61">The sound of a skateboard rolling can be heard, accompanied by background music, in a park setting.</font></td>
+                  <td><font color="061E61">A skateboarder performs tricks on stairs and rails, accompanied by music and sounds, as people watch and take photos in a sunny outdoor setting.</font></td>
+                  <td><font color="061E61">A skateboarder performs tricks on concrete stairs and rails while music plays in the background, accompanied by rustling and banging sounds, as people watch and take photos in a sunny outdoor setting with trees and a building.</font></td>
+
+                </tr>
+                <tr>
+                  <td scope="row"><audio controls="controls">
+                      <source src="audio_samples/caption_sample/YKcgMyfsPYEA.wav"
+                        autoplay />Your browser does not support the audio element.
+                    </audio></td>
+                  <td><font color="061E61">Firecrackers pop as men converse in a noisy environment.</font></td>
+                  <td><font color="061E61">Gunshots ring out followed by a man speaking in an urban setting, as indicated by the audio-visual label 'Firecracker; Speech; Outside, urban or manmade'.</font></td>
+                  <td><font color="061E61">Fireworks are going off outside while a man is speaking, followed by a dark scene with bright lights illuminating from the top.</font></td>
+                  <td><font color="061E61">Fireworks are going off outside while a man is speaking, followed by the sound of a dark, possibly nighttime scene with bright lights illuminating from the top.</font></td>
+
+                </tr>
+                <tr>
+                  <td scope="row"><audio controls="controls">
+                      <source src="audio_samples/caption_sample/YOevrLlXH_pA.wav"
+                        autoplay />Your browser does not support the audio element.
+                    </audio></td>
+                  <td><font color="061E61">A group of men are speaking and making mechanical sounds.</font></td>
+                  <td><font color="061E61">A man delivers a speech in a small room, with the audio-visual label indicating the presence of speech.</font></td>
+                  <td><font color="061E61">An adult male is speaking in a room, gesturing with his hands and expressing himself.</font></td>
+                  <td><font color="061E61">An adult male is speaking in a room with various items on shelves, including bottles and possibly art supplies, while gesturing with his hands and expressing himself, with a blurred effect suggesting movement or a low-quality camera.</font></td>
+                </tr>
+                <tr>
+                  <td scope="row"><audio controls="controls">
+                      <source src="audio_samples/caption_sample/Y7vBIvetY4SI.wav"
+                        autoplay />Your browser does not support the audio element.
+                    </audio></td>
+                  <td><font color="061E61">Human sounds and music play.</font></td>
+                  <td><font color="061E61">A cat meows while music plays in a dressing room.</font></td>
+                  <td><font color="061E61">A man is singing along to music, accompanied by the sound of a cat meowing, as he moves around in a bathroom setting.</font></td>
+                  <td><font color="061E61">A man with cat-like face paint and a playful expression is singing along to music, accompanied by the sound of a cat meowing, as he moves around in a bathroom or similar setting.</font></td>
+                </tr>
+                <tr>
+                  <td scope="row"><audio controls="controls">
+                      <source src="audio_samples/caption_sample/Yk0tIXL-c7mw.wav"
+                        autoplay />Your browser does not support the audio element.
+                    </audio></td>
+                  <td><font color="061E61">Typing, mechanisms, beeps, and ticking can be heard.</font></td>
+                  <td><font color="061E61">The sound of a typewriter fills a small room as the person types on the keyboard.</font></td>
+                  <td><font color="061E61">A person types away on a typewriter, feeding paper into the machine while sitting in a quiet indoor environment, possibly an office or study room, surrounded by blurred background sounds.</font></td>
+                  <td><font color="061E61">A person types away on a vintage green typewriter with a red stripe, feeding paper into the machine while sitting in a quiet indoor environment, possibly an office or study room, surrounded by blurred background sounds.</font></td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <br></br>
+            <h2 id="Sound-VECaps Caption Demos">
+              <font color="000093">TTA Generation Demos (AudioLDM trained on Sound-VECaps)</font>
+            </h2>
+
+            <table class="table" align="center" style="table-layout: fixed;word-break:break-word; font-size: 14px;">
+              <thead>
+                <tr>
+                  <td scope="col" width="32%">
+                    <font color="061E61">Video</font>
+                  </td>
+                  <td scope="col" width="36%">
+                    <font color="061E61">Caption</font>
+                  </td>
+                  <td scope="col" width="32%">
+                    <font color="061E61">Result</font>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row"><video width="300" controls>
+                    <source src="audio_samples/generation_sample/video/Y_9mgOkzm-xg.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                  </video></td>
+                  <td><font color="061E61">A tattooed man is cooking in a kitchen with a white stove, using a wooden spoon to stir chopped green vegetables in a black skillet. The kitchen is filled with various containers and kitchen tools. Wood clanks on the metal pan, followed by gravel crunching as food and oil sizzle invitingly.</font></td>
+                  <td><audio controls="controls" style="width: 300px;">
+                    <source src="audio_samples/generation_sample/audio/Y_9mgOkzm-xg.wav"
+                      autoplay />Your browser does not support the audio element.
+                  </audio></td>
+                </tr>
+                <tr>
+                  <td scope="row"><video width="300" controls>
+                    <source src="audio_samples/generation_sample/video/Y_BSmz3SEW1w.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                  </video></td>
+                  <td><font color="061E61">In a dimly lit, rustic indoor setting, pigeons of various colors, including white, black, and brown, rustle and coo around wooden perches and feeding platforms on a rough concrete floor, creating an atmosphere reminiscent of a pigeon loft or shelter.</font></td>
+                  <td><audio controls="controls" style="width: 300px;">
+                    <source src="audio_samples/generation_sample/audio/Y_BSmz3SEW1w.wav"
+                      autoplay />Your browser does not support the audio element.
+                  </audio></td>
+                </tr>
+                <tr>
+                  <td scope="row"><video width="300" controls>
+                    <source src="audio_samples/generation_sample/video/Y-CcGuq0yoKo.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                  </video></td>
+                  <td><font color="061E61">A woman is speaking from a microphone at an outdoor event, likely a school function, on a stage with a green backdrop, banner with a shield-like emblem, and various plants. The weather appears clear, with several people seated on the stage and in the audience, attentively listening.</font></td>
+                  <td><audio controls="controls" style="width: 300px;">
+                    <source src="audio_samples/generation_sample/audio/Y-CcGuq0yoKo.wav"
+                      autoplay />Your browser does not support the audio element.
+                  </audio></td>
+                </tr>
+                <tr>
+                  <td scope="row"><video width="300" controls>
+                    <source src="audio_samples/generation_sample/video/Y-R69Fa-mCaY.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                  </video></td>
+                  <td><font color="061E61">A man uses a chainsaw to cut down a tree amid a grassy field with scattered debris. The surroundings include fallen branches, stumps, and logs. The sky is overcast with occasional sunlight filtering through, adding a peaceful yet industrious atmosphere.</font></td>
+                  <td><audio controls="controls" style="width: 300px;">
+                    <source src="audio_samples/generation_sample/audio/Y-R69Fa-mCaY.wav"
+                      autoplay />Your browser does not support the audio element.
+                  </audio></td>
+                </tr>
+                <tr>
+                  <td scope="row"><video width="300" controls>
+                    <source src="audio_samples/generation_sample/video/Y0a9wVat2PWk.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                  </video></td>
+                  <td><font color="061E61">A train sounds its horn while traveling on the tracks, passing through a lush, green forest with partly cloudy skies. Reflections of the dense evergreens and occasional clearings are visible in the train windows, enhancing the serene, natural ambiance. The train's motion blurs the vibrant landscape, giving a sense of considerable speed.</font></td>
+                  <td><audio controls="controls" style="width: 300px;">
+                    <source src="audio_samples/generation_sample/audio/Y0a9wVat2PWk.wav"
+                      autoplay />Your browser does not support the audio element.
+                  </audio></td>
+                </tr>
+                <tr>
+                  <td scope="row"><video width="300" controls>
+                    <source src="audio_samples/generation_sample/video/Y1OyEgzXCkYE.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                  </video></td>
+                  <td><font color="061E61">An adult male, likely a political figure, stands behind a podium adorned with the U.S. presidential seal, flanked by U.S. and Myanmar flags. He addresses a crowd under clear skies, discussing Myanmar's democratic progress and reconciliation, as captured in a live CNN broadcast with subtitles highlighting the ongoing peace process.</font></td>
+                  <td><audio controls="controls" style="width: 300px;">
+                    <source src="audio_samples/generation_sample/audio/Y1OyEgzXCkYE.wav"
+                      autoplay />Your browser does not support the audio element.
+                  </audio></td>
+                </tr>
+                <tr>
+                  <td scope="row"><video width="300" controls>
+                    <source src="audio_samples/generation_sample/video/Y0yxEvdnimGg.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                  </video></td>
+                  <td><font color="061E61">A dog barks as a man speaks amidst chirping birds and wind blowing into a microphone. The scene is an open grassy field with trees, scattered objects, tents, and vehicles, suggesting a park event. The dog, possibly a Border Collie or sheepdog, chases a yellow frisbee under a clear sky.</font></td>
+                  <td><audio controls="controls" style="width: 300px;">
+                    <source src="audio_samples/generation_sample/audio/Y0yxEvdnimGg.wav"
+                      autoplay />Your browser does not support the audio element.
+                  </audio></td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            </p>
+
+          </section>
+        </article>
+      </main>
+
+    </div>
+
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('create', 'UA-139981676-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+         HTML: ["input/TeX","output/HTML-CSS"],
+         TeX: {
+                Macros: {
+                         bm: ["\\boldsymbol{#1}", 1],
+                         argmax: ["\\mathop{\\rm arg\\,max}\\limits"],
+                         argmin: ["\\mathop{\\rm arg\\,min}\\limits"]},
+                extensions: ["AMSmath.js","AMSsymbols.js"],
+                equationNumbers: { autoNumber: "AMS" } },
+         extensions: ["tex2jax.js"],
+         jax: ["input/TeX","output/HTML-CSS"],
+         tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    processEscapes: true },
+         "HTML-CSS": { availableFonts: ["TeX"],
+                       linebreaks: { automatic: true } }
+     });
+ </script>
+
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+       }
+     });
+ </script>
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+      </script>
+
+
+
+
+</body>
+
+</html>
