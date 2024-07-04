@@ -65,17 +65,13 @@
               <font color="000093">Abstract</font>
             </h2>
             <p style="text-align: justify;">
-              <font color="061E61"> Driven by diffusion-based models, multimodal learning has shown significant promise in audio generation tasks. 
-                However, existing models often struggle with extended and complex prompts, particularly when captions contain intricate information, 
-                leading to performance degradation, especially in real-world scenarios. 
-                We hypothesize that this issue stems from the quality and quantity of the training datasets. 
-                To address these challenges, we propose a large-scale audio dataset with visually-guided enhanced captions. 
-                We introduce Sound-VECaps, a comprehensive dataset comprising 1.66M high-quality audio-caption pairs with enriched captions, 
-                such as event orders, occurred places, environment information and so on. Additionally, we develop a human-supervised testing set with similar captioning pipelines.
-                 Our results demonstrate that training with Sound-VECaps significantly enhances the model's ability to comprehend and generate audio from complex input prompts, 
-                improving overall system performance. Training with Sound-VECaps, our generation system, AudioLDM, achieves a FAD score of 1.49 on the AudioCaps testing set and 1.06 for the caption-enhanced testing set. 
-                Furthermore, we conduct an extensive analysis of Sound-VECaps across several audio-language tasks, 
-                highlighting the reliability and utility in advancing audio-language multimodal learning.  </font>
+              <font color="061E61"> Generative models have shown significant achievements in audio generation tasks. However, existing models struggle with complex and detailed prompts, 
+                leading to potential performance degradation. We hypothesize that this problem stems from the low quality and relatively small quantity of training data. 
+                In this work, we aim to create a large-scale audio dataset with rich captions for improving audio generation models. We develop an automated pipeline to generate detailed captions for audio-visual datasets by transforming predicted visual captions, 
+                audio captions, and tagging labels into comprehensive descriptions using a Large Language Model (LLM). We introduce Sound-VECaps, a dataset comprising 1.66M high-quality audio-caption pairs with enriched details including audio event orders, 
+                occurred places and environment information. We demonstrate that training with Sound-VECaps significantly enhances the capability of text-to-audio generation models to comprehend and generate audio from complex input prompts, 
+                improving overall system performance. Furthermore, we conduct ablation studies of Sound-VECaps across several audio-language tasks, suggesting its potential in advancing audio-text representation learning. 
+                Our dataset and models are available online.   </font>
             </p>
 
 
