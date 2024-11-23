@@ -90,6 +90,30 @@
                 </p>
               </figcaption>
             </figure>
+
+            <p style="text-align: justify; font-family: georgian;">
+              <font> 
+                <!-- <strong> -->
+                  We provide the prompts used as the input for the Llama3 model to generate our proposed captions. 
+                  As shown below, the prompt is a combination of three different features. 
+                  In the system section, both the caption from Enclap and the audio label are provided, while the frame captions are presented as the user input. 
+                  Two different contents are also provided for both the full-featured caption (section in green boundaries) and the caption that filtered all the visual-only contents (section in red boundaries).  
+                  For the AudioCaps-Enhanced dataset, we apply the same prompting pipeline, while changing the caption of enclap into the actual caption provided by the AudioCaps testing set. 
+                  Nevertheless, all the captions for AudioCaps-Enhanced are generated under human-involved supervision, to ensure the correctness and relevance of the prompts.
+              <!-- </strong> -->
+              </font>
+            </p>
+            <figure>
+              <p align="center"><img src="prompt_full.png" width="100%" class="center" /></p>
+              <figcaption>
+                
+                <p style="text-align: justify;">
+                  <center>
+                  <font color="061E61"><b>Figure 2:</b> Prompts used for Llama3 in the proposed generation pipeline
+                  </center>
+                </p>
+              </figcaption>
+            </figure>
             
 
 
@@ -300,11 +324,24 @@
 
             </p>
 
+            <br></br>
+            <h2 id="Sound-VECaps Caption Demos">
+              <font color="000093">Information for Human Evaluation (MOS)</font>
+            </h2>
+
+            <p style="text-align: justify; font-size: 20px">
+              <font color="061E61"> We follow the evaluation procedure outlined in AudioLDM2, assessing audio quality based on two criteria: relevance and overall quality. 
+                Testers are asked to rate each audio sample on its relevance to the caption and its overall quality, using a five-point scale where 5 indicates the highest score and 1 the lowest. 
+                The Mean Opinion Score (MOS) is then calculated as the average of the two scores. For the evaluation, we randomly selected 20 audio samples from each model and engaged 10 listeners, including 6 professional researchers in the audio field and 4 engineers from other disciplines. </font>
+            </p>
+
           </section>
         </article>
       </main>
 
     </div>
+
+
 
     <script>
       (function (i, s, o, g, r, a, m) {
